@@ -1,0 +1,8 @@
+{{form.value | json}}
+
+<form [formGroup]="form" *ngIf="formConfig">
+
+  <ng-container appFormFieldGenerator [fieldConfig]="fieldConfig" [form]="form" *ngFor="let fieldConfig of formConfig">
+
+  </ng-container>
+</form>

@@ -1,0 +1,11 @@
+<div [formGroup]="form">
+  <mat-form-field>
+    <mat-select [placeholder]="config.placeholder"
+                [formControlName]="config.name">
+      <mat-option *ngFor="let food of config.options"
+                  [value]="food">
+        {{food}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

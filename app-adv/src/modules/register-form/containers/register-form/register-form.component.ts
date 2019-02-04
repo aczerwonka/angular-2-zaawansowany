@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RegisterService } from '../../services/register.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-register-form',
@@ -6,8 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register-form.component.scss']
 })
 export class RegisterFormComponent implements OnInit {
+  config$: any;
 
-  constructor() { }
+  constructor(private registerService: RegisterService) {
+    this.config$ = this.registerService.getConfig().pipe(
+      map((resp) => {
+        return resp.data;
+      })
+    );
+  }
 
   ngOnInit() {
   }
