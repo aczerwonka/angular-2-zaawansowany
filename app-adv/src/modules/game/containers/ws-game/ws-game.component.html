@@ -1,3 +1,9 @@
 <p>
-  ws-game works!
+  game works!
 </p>
+
+<ng-template #avatar let-data>
+  <div class="el" [ngStyle]="{left: data.clientX + 'px', top: data.clientY + 'px'}">
+    {{data.username}}
+  </div>
+</ng-template>

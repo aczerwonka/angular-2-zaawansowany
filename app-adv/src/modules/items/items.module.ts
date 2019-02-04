@@ -10,4 +10,6 @@ import { RouterModule } from '@angular/router';
     RouterModule.forChild([{ path: '', component: ItemsComponent }])
   ]
 })
-export class ItemsModule { }
+export class ItemsModule {
+
+ }
