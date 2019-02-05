@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form-generator',
@@ -21,7 +21,7 @@ export class FormGeneratorComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({});
-   }
+  }
 
   ngOnInit() {
 
@@ -29,8 +29,27 @@ export class FormGeneratorComponent implements OnInit {
 
   createForm(value: any[]): any {
     value.filter((field) => { return field.type !== 'button' }).forEach(field => {
-      this.form.addControl(field.name, this.fb.control(field.value));
+      this.form.addControl(field.name, this.fb.control(field.value, this.getValidators(field.validation)));
     });
   }
 
+  onSubmit() {
+    console.log(this.form.value);
+  }
+
+  getValidators(validation) {
+    if (!validation) return;
+    return validation.map((validator) => {
+      if (/object/.test(typeof validator)) {
+        const [fn, param] = validator;
+        if (fn in Validators) {
+          return Validators[fn](param);
+        }
+      } else {
+        if (validator in Validators) {
+          return Validators[validator];
+        }
+      }
+    })
+  }
 }

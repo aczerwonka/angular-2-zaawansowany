@@ -1,6 +1,9 @@
 {{form.value | json}}
+<br>
+valid: {{form.valid}}
 
-<form [formGroup]="form" *ngIf="formConfig">
+<br>
+<form [formGroup]="form" *ngIf="formConfig" (submit)="onSubmit($event)">
 
   <ng-container appFormFieldGenerator [fieldConfig]="fieldConfig" [form]="form" *ngFor="let fieldConfig of formConfig">
 

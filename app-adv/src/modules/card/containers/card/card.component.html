@@ -1,0 +1,19 @@
+<br>
+<br>
+
+
+<table>
+  <thead></thead>
+  <tbody>
+    <tr *ngFor="let item of data$ | async">
+      <td>{{item.title}}</td>
+      <td matBadge='{{item.count}}'></td>
+      <td>
+        <mat-chip-list>
+          <mat-chip (click)='add(item)'>+</mat-chip>
+          <mat-chip (click)='remove(item)'>-</mat-chip>
+        </mat-chip-list>
+      </td>
+    </tr>
+  </tbody>
+</table>

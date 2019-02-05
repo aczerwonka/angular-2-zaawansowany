@@ -7,6 +7,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainComponent } from './main/main.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import { provideForRootGuard } from '@angular/router/src/router_module';
+import { StoreModule } from "@ngrx/store";
+import { cardReducer } from 'src/modules/card/store/card.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { CardEffectsService } from 'src/modules/card/store/card.effects';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +28,10 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    StoreModule.forRoot({card: cardReducer}),
+    EffectsModule.forRoot([CardEffectsService]),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -13,7 +13,11 @@ export class RegisterFormComponent implements OnInit {
   constructor(private registerService: RegisterService) {
     this.config$ = this.registerService.getConfig().pipe(
       map((resp) => {
-        return resp.data;
+        const data = [{
+          "type": "input",
+          "name": "email"
+        }, ...resp.data];
+        return data;
       })
     );
   }
