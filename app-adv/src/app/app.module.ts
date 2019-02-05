@@ -13,6 +13,10 @@ import { cardReducer } from 'src/modules/card/store/card.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { CardEffectsService } from 'src/modules/card/store/card.effects';
 import { HttpClientModule } from '@angular/common/http';
+import { StoreDevtoolsModule} from '@ngrx/store-devtools';
+import { reducers, metaReducers } from './reducers';
+import { environment } from '../environments/environment';
+import { AppEffects } from './app.effects';
 
 @NgModule({
   declarations: [
@@ -29,9 +33,12 @@ import { HttpClientModule } from '@angular/common/http';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    StoreModule.forRoot({card: cardReducer}),
-    EffectsModule.forRoot([CardEffectsService]),
-    HttpClientModule
+    StoreModule.forFeature('card', cardReducer),
+    EffectsModule.forRoot([CardEffectsService, AppEffects]),
+    HttpClientModule,
+    StoreDevtoolsModule.instrument(),
+    StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [],
   bootstrap: [AppComponent]
