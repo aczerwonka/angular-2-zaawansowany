@@ -22,6 +22,7 @@
       </button>
       <span>app-adv</span>
       <button mat-raised-button color='accent' routerLink='card'>show card</button>
+      {{count$ | async}}
     </mat-toolbar>
     <!-- Add Content Here -->
     <router-outlet></router-outlet>

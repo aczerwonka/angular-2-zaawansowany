@@ -8,7 +8,7 @@ import { MainComponent } from './main/main.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 import { provideForRootGuard } from '@angular/router/src/router_module';
-import { StoreModule } from "@ngrx/store";
+import { StoreModule, Store } from "@ngrx/store";
 import { cardReducer } from 'src/modules/card/store/card.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { CardEffectsService } from 'src/modules/card/store/card.effects';
@@ -17,6 +17,8 @@ import { StoreDevtoolsModule} from '@ngrx/store-devtools';
 import { reducers, metaReducers } from './reducers';
 import { environment } from '../environments/environment';
 import { AppEffects } from './app.effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { CustomSerializer } from './reducers/custom-route.serializer';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { AppEffects } from './app.effects';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    StoreRouterConnectingModule.forRoot({serializer: CustomSerializer}),
     StoreModule.forFeature('card', cardReducer),
     EffectsModule.forRoot([CardEffectsService, AppEffects]),
     HttpClientModule,
@@ -43,4 +46,6 @@ import { AppEffects } from './app.effects';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+}

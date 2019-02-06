@@ -14,4 +14,6 @@ import { MatBadge, MatBadgeModule, MatChipsModule } from '@angular/material';
   ],
 
 })
-export class CardModule { }
+export class CardModule {
+
+}

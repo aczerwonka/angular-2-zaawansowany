@@ -11,6 +11,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromItems from './store/items.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { ItemsEffects } from './store/items.effects';
+import { DetailsGuard } from './services/details.guard';
 
 @NgModule({
   declarations: [ItemsComponent, ListaComponent, DetailsItemComponent],
@@ -18,7 +19,7 @@ import { ItemsEffects } from './store/items.effects';
     CommonModule,
     RouterModule.forChild([
       { path: '', component: ItemsComponent }
-      , { path: ':id', component: DetailsItemComponent }
+      , { path: ':id', canActivate: [DetailsGuard], component: DetailsItemComponent }
     ]),
     MatTableModule,
     MatPaginatorModule,
